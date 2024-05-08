@@ -44,4 +44,4 @@ def find_next_button():
 if __name__ == '__main__':
     while True:
         find_next_button()
-        time.sleep(3)  # Wait for 10 seconds before taking another screenshot
+        time.sleep(3)  # Wait for 3 seconds before taking another screenshot
