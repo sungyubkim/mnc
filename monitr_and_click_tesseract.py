@@ -18,14 +18,15 @@ def find_next_button():
     if 'NEXT' in text:
         print("Found 'NEXT'. Attempting to click...")
         # Attempt to find the button position using image analysis
-        for word in pytesseract.image_to_data(screenshot, output_type=pytesseract.Output.DICT)['text']:
+        data = pytesseract.image_to_data(screenshot, output_type=pytesseract.Output.DICT)
+        for word in data['text']:
             if word.lower() == 'next':
-                index = pytesseract.image_to_data(screenshot, output_type=pytesseract.Output.DICT)['text'].index(word)
+                index = data['text'].index(word)
                 # Get bounding box coordinates
-                x, y, w, h = pytesseract.image_to_data(screenshot, output_type=pytesseract.Output.DICT)['left'][index], \
-                             pytesseract.image_to_data(screenshot, output_type=pytesseract.Output.DICT)['top'][index], \
-                             pytesseract.image_to_data(screenshot, output_type=pytesseract.Output.DICT)['width'][index], \
-                             pytesseract.image_to_data(screenshot, output_type=pytesseract.Output.DICT)['height'][index]
+                x, y, w, h = data['left'][index], \
+                             data['top'][index], \
+                             data['width'][index], \
+                             data['height'][index]
                 
                 # Calculate the center of the bounding box
                 x_center = x + w / 2
@@ -43,4 +44,4 @@ def find_next_button():
 if __name__ == '__main__':
     while True:
         find_next_button()
-        time.sleep(10)  # Wait for 10 seconds before taking another screenshot
+        time.sleep(3)  # Wait for 10 seconds before taking another screenshot
